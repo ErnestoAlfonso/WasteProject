@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: msvc-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: address
+          uri: 'http://localhost:8081'
+          predicates:
+            - Path=/api/address/**
+        - id: manager
+          uri: 'http://localhost:8091'
+          predicates:
+            - Path=/api/manager/**
+        - id: wastea
+          uri: 'http://localhost:8092'
+          predicates:
+            - Path=/api/authorization/**
+eureka:
+  client:
+    register-with-eureka: false
