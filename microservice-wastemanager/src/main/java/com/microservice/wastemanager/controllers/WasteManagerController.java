@@ -4,9 +4,12 @@ import com.microservice.wastemanager.dto.WasteManagerDTO;
 import com.microservice.wastemanager.entities.WasteManager;
 import com.microservice.wastemanager.services.IWasteManagerAuthorizationService;
 import com.microservice.wastemanager.services.IWasteManagerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -24,12 +27,32 @@ public class WasteManagerController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@RequestBody WasteManagerDTO wasteManagerDTO){
+    public ResponseEntity<?> create(@Valid @RequestBody WasteManagerDTO wasteManagerDTO, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            StringBuilder errorMessage = new StringBuilder("Validation errors:\n");
+            for(FieldError error : bindingResult.getFieldErrors()){
+                errorMessage.append(error.getField())
+                        .append(": ")
+                        .append(error.getDefaultMessage())
+                        .append("\n");
+            }
+            return ResponseEntity.badRequest().body(errorMessage.toString());
+        }
         return ResponseEntity.ok(service.create(wasteManagerDTO));
     }
 
     @PutMapping("/update")
-    public  ResponseEntity<?> update(@RequestBody WasteManager wasteManager){
+    public  ResponseEntity<?> update(@Valid @RequestBody WasteManager wasteManager,BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            StringBuilder errorMessage = new StringBuilder("Validation errors:\n");
+            for(FieldError error : bindingResult.getFieldErrors()){
+                errorMessage.append(error.getField())
+                        .append(": ")
+                        .append(error.getDefaultMessage())
+                        .append("\n");
+            }
+            return ResponseEntity.badRequest().body(errorMessage.toString());
+        }
         return ResponseEntity.ok(service.update(wasteManager));
     }
 

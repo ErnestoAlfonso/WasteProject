@@ -11,6 +11,6 @@ public interface IWasteManagerAddressService {
     List<WasteManagerAddress> findAll();
 
     Optional<WasteManagerAddress> update(WasteManagerAddress wasteManagerAddress, BindingResult bindingResult);
-    WasteManagerAddress save(WasteManagerAddress wasteManagerAddress);
+    Optional<WasteManagerAddress> save(WasteManagerAddress wasteManagerAddress);
 
 }

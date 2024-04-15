@@ -47,8 +47,8 @@ public class WasteManagerAddressServiceImpl implements  IWasteManagerAddressServ
     }
 
     @Override
-    public WasteManagerAddress save(WasteManagerAddress wasteManagerAddress) {
-        return repository.save(wasteManagerAddress);
+    public Optional<WasteManagerAddress> save(WasteManagerAddress wasteManagerAddress) {
+        return Optional.of(repository.save(wasteManagerAddress));
     }
 
 }

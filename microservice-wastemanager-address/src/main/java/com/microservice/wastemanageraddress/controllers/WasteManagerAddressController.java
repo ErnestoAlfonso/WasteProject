@@ -17,18 +17,13 @@ public class WasteManagerAddressController {
     private IWasteManagerAddressService service;
 
     @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> saveAddress(@RequestBody WasteManagerAddress wasteManagerAddress){
-        return  ResponseEntity.ok(service.save(wasteManagerAddress));
+    public Optional<WasteManagerAddress> saveAddress(@RequestBody WasteManagerAddress wasteManagerAddress){
+        return service.save(wasteManagerAddress);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateAddress(@RequestBody WasteManagerAddress wasteManagerAddress, BindingResult bindingResult){
-        Optional<WasteManagerAddress> wasteManagerAuthorizationOptional = service.update(wasteManagerAddress,bindingResult);
-        if (wasteManagerAuthorizationOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.CREATED).body(wasteManagerAuthorizationOptional.orElseThrow());
-        }
-        return ResponseEntity.notFound().build();
+    public Optional<WasteManagerAddress> updateAddress(@RequestBody WasteManagerAddress wasteManagerAddress, BindingResult bindingResult){
+        return service.update(wasteManagerAddress,bindingResult);
     }
 
     @GetMapping("/all")
