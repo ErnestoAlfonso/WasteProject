@@ -19,5 +19,4 @@ public class AddressDTO {
     private Boolean isEnabled = Boolean.TRUE;
     private Date createdDate;
     private Date lastModifiedDate;
-    private Long wasteManagerId;
 }

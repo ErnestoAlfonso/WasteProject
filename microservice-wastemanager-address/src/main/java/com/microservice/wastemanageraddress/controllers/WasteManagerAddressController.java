@@ -36,8 +36,8 @@ public class WasteManagerAddressController {
         return ResponseEntity.ok(service.findAll());
     }
     @GetMapping("/search/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id){
-        return ResponseEntity.ok(service.findById(id));
+    public Optional<WasteManagerAddress> findById(@PathVariable Long id){
+        return service.findById(id);
     }
 
 //    @GetMapping("/search-by-manager/{wasteManagerId}")

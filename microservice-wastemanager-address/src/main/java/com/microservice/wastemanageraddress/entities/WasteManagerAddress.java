@@ -27,6 +27,5 @@ public class WasteManagerAddress {
     private Date createdDate;
     @Column(name= "last_modified_date")
     private Date lastModifiedDate;
-    @Column(name = "waste_manager_id")
-    private Long wasteManagerId;
+
 }

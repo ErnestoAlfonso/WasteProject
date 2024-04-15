@@ -17,8 +17,8 @@ public class WasteManagerAddressServiceImpl implements  IWasteManagerAddressServ
     @Autowired
     private WasteManagerAddressRepository repository;
     @Override
-    public WasteManagerAddress findById(Long id) {
-        return repository.findById(id).orElseThrow();
+    public Optional<WasteManagerAddress> findById(Long id) {
+        return repository.findById(id);
     }
 
     @Override
@@ -38,7 +38,6 @@ public class WasteManagerAddressServiceImpl implements  IWasteManagerAddressServ
             wasteManagerAddress1.setIsEnabled(wasteManagerAddress.getIsEnabled());
             wasteManagerAddress1.setCreatedDate(wasteManagerAddress.getCreatedDate());
             wasteManagerAddress1.setLastModifiedDate(wasteManagerAddress.getLastModifiedDate());
-            wasteManagerAddress1.setDirection(wasteManagerAddress.getDirection());
 
 
             return Optional.of(repository.save(wasteManagerAddress1));
@@ -52,8 +51,4 @@ public class WasteManagerAddressServiceImpl implements  IWasteManagerAddressServ
         return repository.save(wasteManagerAddress);
     }
 
-    @Override
-    public WasteManagerAddress findByWaste(Long wasteManagerId) {
-        return repository.findBywasteManagerId(wasteManagerId);
-    }
 }
