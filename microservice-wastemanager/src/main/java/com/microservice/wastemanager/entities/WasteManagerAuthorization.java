@@ -1,6 +1,7 @@
 package com.microservice.wastemanager.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Data
@@ -17,6 +18,7 @@ public class WasteManagerAuthorization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Authorization numbre cannot be blank")
     private String authorizationNumber;
 
 

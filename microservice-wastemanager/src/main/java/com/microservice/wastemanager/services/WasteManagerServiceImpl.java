@@ -52,8 +52,8 @@ public class WasteManagerServiceImpl implements IWasteManagerService{
         // Avoid mistakes
         for (WasteManagerAuthorization item : authList){
             comparer.add(item.getId());
-            Optional<WasteManagerAuthorization> e = wasteManagerAuthorizationRepository.findById(item.getId());
-            if (e.isEmpty()){
+            Optional<WasteManagerAuthorization> optionalWasteManagerAuthorization = wasteManagerAuthorizationRepository.findById(item.getId());
+            if (optionalWasteManagerAuthorization.isEmpty()){
                 return ResponseEntity.badRequest().body("No existe alguno de los authorization");
             }
         }
